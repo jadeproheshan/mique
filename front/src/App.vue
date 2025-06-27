@@ -4,8 +4,11 @@
     <a-layout-header
       style="background: #fff; height: 64px; line-height: 64px; box-shadow: 0 2px 8px #f0f1f2; position: fixed; top: 0; left: 0; width: 100%; z-index: 10;"
     >
-      <div style="font-size: 20px; font-weight: bold; color: #1677ff;">
-        河南大学社团管理系统
+      <div class="header-content">
+        <img class="logo" src="https://www.henu.edu.cn/images/logo.png" alt="河南大学logo" />
+        <div style="font-size: 20px; font-weight: bold; color: #1677ff;">
+          河南大学社团管理系统
+        </div>
       </div>
     </a-layout-header>
     
@@ -74,132 +77,133 @@
             <a-tabs v-model:activeKey="activeKey" class="manager-tab">
               <a-tab-pane key="basic-info" tab="基本信息">基本信息</a-tab-pane>
               <a-tab-pane key="member-management" tab="成员管理">
-                <div style="padding: 24px; border-bottom: 1px solid #f0f0f0;">
-                  <!-- 第一行：搜索框和查询按钮 -->
-                  <a-row :gutter="16" style="margin-bottom: 16px">
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">成员编号</span>
-                        <a-input
-                          v-model:value="searchForm.memberCode"
-                          style="width: calc(100% - 70px)"
-                          allowClear
-                        />
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">成员名称</span>
-                        <a-input
-                          v-model:value="searchForm.memberName"
-                          style="width: calc(100% - 70px)"
-                          allowClear
-                        />
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">所属学院</span>
-                        <a-select
-                          v-model:value="searchForm.college"
-                          style="width: calc(100% - 70px)"
-                          allowClear
-                        >
-                          <a-select-option value="">全部</a-select-option>
-                          <a-select-option value="computer">计算机学院</a-select-option>
-                          <a-select-option value="math">数学学院</a-select-option>
-                          <a-select-option value="physics">物理学院</a-select-option>
-                        </a-select>
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-button type="primary" @click="onSearch">
-                        <search-outlined />
-                        查询
-                      </a-button>
-                    </a-col>
-                  </a-row>
-
-                  <!-- 第二行：筛选器和重置按钮 -->
-                  <a-row :gutter="16">
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">筛选方式</span>
-                        <a-select
-                          v-model:value="searchForm.filterType"
-                          style="width: calc(100% - 70px)"
-                          allowClear
-                        >
-                          <a-select-option value="">全部</a-select-option>
-                          <a-select-option value="department">按部门</a-select-option>
-                          <a-select-option value="role">按角色</a-select-option>
-                        </a-select>
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">创建时间</span>
-                        <a-range-picker
-                          v-model:value="searchForm.createTime"
-                          style="width: calc(100% - 70px)"
-                          :placeholder="['开始', '结束']"
-                        />
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-input-group compact>
-                        <span class="search-label">状态</span>
-                        <a-select
-                          v-model:value="searchForm.status"
-                          style="width: calc(100% - 70px)"
-                          allowClear
-                        >
-                          <a-select-option value="">全部</a-select-option>
-                          <a-select-option value="active">在职</a-select-option>
-                          <a-select-option value="inactive">离职</a-select-option>
-                        </a-select>
-                      </a-input-group>
-                    </a-col>
-                    <a-col :span="6">
-                      <a-button @click="resetSearch">
-                        <reload-outlined />
-                        重置
-                      </a-button>
-                    </a-col>
-                  </a-row>
-                  
-                  <!-- 操作按钮组 -->
-                  <a-row style="margin-top: 16px">
-                    <a-col :span="24">
-                      <a-space>
-                        <a-upload
-                          :before-upload="beforeUpload"
-                          :customRequest="handleUpload"
-                        >
-                          <a-button type="primary">
-                            <upload-outlined />
-                            批量导入
-                          </a-button>
-                        </a-upload>
-                        <a-button @click="downloadTemplate">
-                          <download-outlined />
-                          下载模板
+                <div class="content-wrapper">
+                  <!-- 搜索区域 -->
+                  <div class="search-area">
+                    <!-- 第一行：搜索框和查询按钮 -->
+                    <a-row :gutter="16" style="margin-bottom: 16px">
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">成员编号</span>
+                          <a-input
+                            v-model:value="searchForm.memberCode"
+                            style="width: calc(100% - 70px)"
+                            allowClear
+                          />
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">成员名称</span>
+                          <a-input
+                            v-model:value="searchForm.memberName"
+                            style="width: calc(100% - 70px)"
+                            allowClear
+                          />
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">所属学院</span>
+                          <a-select
+                            v-model:value="searchForm.college"
+                            style="width: calc(100% - 70px)"
+                            allowClear
+                          >
+                            <a-select-option value="">全部</a-select-option>
+                            <a-select-option value="computer">计算机学院</a-select-option>
+                            <a-select-option value="math">数学学院</a-select-option>
+                            <a-select-option value="physics">物理学院</a-select-option>
+                          </a-select>
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-button type="primary" @click="onSearch">
+                          <search-outlined />
+                          查询
                         </a-button>
-                      </a-space>
-                    </a-col>
-                  </a-row>
+                      </a-col>
+                    </a-row>
+
+                    <!-- 第二行：筛选器和重置按钮 -->
+                    <a-row :gutter="16">
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">筛选方式</span>
+                          <a-select
+                            v-model:value="searchForm.filterType"
+                            style="width: calc(100% - 70px)"
+                            allowClear
+                          >
+                            <a-select-option value="">全部</a-select-option>
+                            <a-select-option value="department">按部门</a-select-option>
+                            <a-select-option value="role">按角色</a-select-option>
+                          </a-select>
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">创建时间</span>
+                          <a-range-picker
+                            v-model:value="searchForm.createTime"
+                            style="width: calc(100% - 70px)"
+                            :placeholder="['开始', '结束']"
+                          />
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-input-group compact>
+                          <span class="search-label">状态</span>
+                          <a-select
+                            v-model:value="searchForm.status"
+                            style="width: calc(100% - 70px)"
+                            allowClear
+                          >
+                            <a-select-option value="">全部</a-select-option>
+                            <a-select-option value="active">在职</a-select-option>
+                            <a-select-option value="inactive">离职</a-select-option>
+                          </a-select>
+                        </a-input-group>
+                      </a-col>
+                      <a-col :span="6">
+                        <a-button @click="resetSearch">
+                          <reload-outlined />
+                          重置
+                        </a-button>
+                      </a-col>
+                    </a-row>
+                  </div>
+
+                  <!-- 操作栏 -->
+                  <div class="operation-bar">
+                    <div class="left-buttons">
+                      <a-button type="primary" @click="handleCreate">
+                        <plus-outlined />
+                        新建
+                      </a-button>
+                      <a-button @click="handleBatchImport">
+                        <upload-outlined />
+                        批量导入
+                      </a-button>
+                      <a-button 
+                        :disabled="!selectedRowKeys.length"
+                        @click="handleBatchDelete"
+                      >
+                        <delete-outlined />
+                        批量删除
+                      </a-button>
+                    </div>
+                    <div class="right-buttons">
+                      <a-button @click="handleDownload">
+                        <download-outlined />
+                        下载
+                      </a-button>
+                    </div>
+                  </div>
                 </div>
                 <!-- 批量操作栏 -->
                 <div style="padding: 16px 24px; background: #fafafa; border-radius: 4px; margin-bottom: 16px;">
                   <a-space>
-                    <a-button 
-                      danger 
-                      :disabled="!selectedRowKeys.length"
-                      @click="handleBatchDelete"
-                    >
-                      <delete-outlined />
-                      批量删除
-                    </a-button>
                     <a-button 
                       :disabled="!selectedRowKeys.length"
                       @click="handleBatchTransfer"
@@ -227,15 +231,27 @@
                     :data-source="dataSource"
                     :pagination="pagination"
                     :loading="loading"
-                    :row-selection="rowSelection"
-                    @change="handleTableChange"
+                    :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+                    :scroll="{ y: 'calc(100vh - 400px)' }"
                     rowKey="id"
                   >
-                    <template #action="{ record }">
-                      <a-space>
-                        <a-button size="small" @click="editMember(record)">编辑</a-button>
-                        <a-button size="small" danger @click="deleteMember(record.id)">删除</a-button>
-                      </a-space>
+                    <!-- 性别列自定义渲染 -->
+                    <template #bodyCell="{ column, record }">
+                      <template v-if="column.key === 'gender'">
+                        {{ record.gender === 'male' ? '男' : '女' }}
+                      </template>
+                      
+                      <!-- 操作列自定义渲染 -->
+                      <template v-if="column.key === 'action'">
+                        <a-space>
+                          <a-button type="link" size="small" @click="handleView(record)">
+                            查看
+                          </a-button>
+                          <a-button type="link" size="small" @click="handleDelete(record)">
+                            删除
+                          </a-button>
+                        </a-space>
+                      </template>
                     </template>
                   </a-table>
                 </div>
@@ -348,91 +364,77 @@ const selectedKeys = ref<string[]>(['4']);
 const columns = [
   {
     title: '成员编号',
-    dataIndex: 'id',
-    key: 'id',
-    width: 100,
-    sorter: (a, b) => a.id.localeCompare(b.id)
-  },
-  {
-    title: '成员名称',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'memberCode',
+    key: 'memberCode',
     width: 120,
   },
   {
-    title: '部门',
-    dataIndex: 'department',
-    key: 'department',
+    title: '成员姓名',
+    dataIndex: 'memberName',
+    key: 'memberName',
     width: 120,
-    filters: [
-      { text: '技术部', value: '技术部' },
-      { text: '宣传部', value: '宣传部' },
-      { text: '外联部', value: '外联部' }
-    ],
-    onFilter: (value, record) => record.department === value
   },
   {
-    title: '学/工号',
-    dataIndex: 'studentId',
-    key: 'studentId',
-    width: 120,
+    title: '性别',
+    dataIndex: 'gender',
+    key: 'gender',
+    width: 80,
+  },
+  {
+    title: '所属学院',
+    dataIndex: 'college',
+    key: 'college',
+    width: 150,
   },
   {
     title: '手机号',
     dataIndex: 'phone',
     key: 'phone',
-    width: 140,
+    width: 120,
   },
   {
-    title: '状态',
-    dataIndex: 'status',
-    key: 'status',
-    width: 100,
-    filters: [
-      { text: '已通过', value: '已通过' },
-      { text: '待审核', value: '待审核' }
-    ],
-    onFilter: (value, record) => record.status === value,
-    customRender: ({ text }) => {
-      const color = text === '已通过' ? '#52c41a' : '#faad14';
-      return h(Tag, { color }, { default: () => text });
-    }
+    title: '入社时间',
+    dataIndex: 'joinTime',
+    key: 'joinTime',
+    width: 120,
+  },
+  {
+    title: '职位',
+    dataIndex: 'position',
+    key: 'position',
+    width: 120,
   },
   {
     title: '操作',
     key: 'action',
-    width: 150,
+    width: 120,
     fixed: 'right',
-    slots: { customRender: 'action' },
   },
 ];
 
 // 模拟数据
 const dataSource = ref([
   {
-    id: '1',
-    name: '张三',
-    department: '技术部',
-    studentId: '20230001',
+    key: '1',
+    memberCode: 'M001',
+    memberName: '张三',
+    gender: 'male',
+    college: '计算机学院',
     phone: '13800138000',
-    status: '已通过'
+    joinTime: '2023-09-01',
+    position: '部长',
   },
   {
-    id: '2',
-    name: '李四',
-    department: '宣传部',
-    studentId: '20230002',
+    key: '2',
+    memberCode: 'M002',
+    memberName: '李四',
+    gender: 'female',
+    college: '数学学院',
     phone: '13800138001',
-    status: '待审核'
+    joinTime: '2023-09-02',
+    position: '副部长',
   },
-  {
-    id: '3',
-    name: '王五',
-    department: '外联部',
-    studentId: '20230003',
-    phone: '13800138002',
-    status: '已通过'
-  },
+  // 更多数据...
 ]);
 
 const pagination = reactive({
@@ -593,6 +595,36 @@ const handleBatchExport = () => {
   // TODO: 实现批量导出逻辑
   console.log('批量导出：', selectedRowKeys.value);
 };
+
+// 查看成员详情
+const handleView = (record: any) => {
+  console.log('查看成员:', record);
+  // TODO: 实现查看详情逻辑
+};
+
+// 删除成员
+const handleDelete = (record: any) => {
+  console.log('删除成员:', record);
+  // TODO: 实现删除逻辑
+};
+
+// 新建成员
+const handleCreate = () => {
+  console.log('新建成员');
+  // TODO: 实现新建逻辑
+};
+
+// 批量导入
+const handleBatchImport = () => {
+  console.log('批量导入');
+  // TODO: 实现批量导入逻辑
+};
+
+// 下载
+const handleDownload = () => {
+  console.log('下载');
+  // TODO: 实现下载逻辑
+};
 </script>
 
 <style scoped>
@@ -617,7 +649,7 @@ const handleBatchExport = () => {
 
 /* 批量操作栏样式 */
 .batch-operation-bar {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   padding: 16px;
   background: #fafafa;
   border-radius: 4px;
@@ -658,5 +690,109 @@ const handleBatchExport = () => {
 :deep(.ant-input-group .ant-select:first-child),
 :deep(.ant-input-group .ant-range-picker:first-child) {
   border-radius: 0 2px 2px 0;
+}
+
+/* 操作按钮样式 */
+:deep(.ant-btn-link) {
+  padding: 0 8px;
+  height: 24px;
+  line-height: 24px;
+}
+
+/* 表格固定列阴影 */
+:deep(.ant-table-cell-fix-right) {
+  background: #fff;
+}
+
+/* 操作栏样式 */
+.operation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 24px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 4px;
+}
+
+.left-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.right-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* 按钮图标对齐 */
+:deep(.anticon) {
+  vertical-align: -0.125em;
+}
+
+/* 区域间距调整 */
+.search-area {
+  padding: 24px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 2px;
+}
+
+:deep(.ant-table-wrapper) {
+  background: #fff;
+  border-radius: 2px;
+  padding: 24px;
+}
+
+/* 确保表格内容不会顶到边框 */
+:deep(.ant-table) {
+  margin: -8px !important;
+}
+
+/* 内容区包装器 */
+.content-wrapper {
+  padding: 0 24px;
+}
+
+/* 搜索区域 */
+.search-area {
+  padding: 24px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 2px 0;
+}
+
+/* 操作栏样式 */
+.operation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 24px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 4px 0;
+}
+
+/* 表格容器样式 */
+:deep(.ant-table-wrapper) {
+  background: #fff;
+  border-radius: 2px;
+  padding: 24px;
+  margin: 2px 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin: 0px -100px -10px -50px;
 }
 </style>
