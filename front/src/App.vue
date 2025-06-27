@@ -25,63 +25,102 @@
 
         <a-menu style="margin-top: 24px;" v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
           <a-menu-item key="1">
-            <user-outlined />
-            <span class="nav-text">nav 1</span>
+            <HomeOutlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="2">
-            <video-camera-outlined />
-            <span class="nav-text">nav 2</span>
+            <FileTextOutlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="3">
-            <upload-outlined />
-            <span class="nav-text">nav 3</span>
+            <DownloadOutlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="4">
-            <bar-chart-outlined />
-            <span class="nav-text">nav 4</span>
+            <file-outlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="5">
-            <cloud-outlined />
-            <span class="nav-text">nav 5</span>
+            <user-outlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="6">
-            <appstore-outlined />
-            <span class="nav-text">nav 6</span>
+            <file-outlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
           <a-menu-item key="7">
-            <team-outlined />
-            <span class="nav-text">nav 7</span>
-          </a-menu-item>
-          <a-menu-item key="8">
-            <shop-outlined />
-            <span class="nav-text">nav 8</span>
+            <SettingOutlined />
+            <span class="nav-text">不用写侧边栏</span>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
       <!-- 内容区 -->
       <a-layout style="margin-left: 200px; min-height: calc(100vh - 64px);">
         <a-layout-content style="margin: 0px 0px 0; overflow: initial;">
+          
           <div style="padding: 24px; background: #fff; text-align: center;">
-            ...
-            <br />
-            Really
-            <br />
-            ...
-            <br />
-            long
-            <br />
-            ...
-            <br />
-            content
-            <br />
-            ...
-            <br />
+
+            //page-header
+            <div class="page-header" style="height:160px;background-color: aquamarine;">
+              <div style="font-size: 64px; font-weight: bold;">社团名称</div>
+              <div style="font-size: 24px;">成员人数、指导老师、挂靠单位</div>
+            </div>
+
+            //tab与高级搜索
+            <a-tabs v-model:activeKey="activeKey" class="manager-tab">
+              <a-tab-pane key="basic-info" tab="基本信息">基本信息</a-tab-pane>
+              <a-tab-pane key="member-management" tab="成员管理">成员管理</a-tab-pane>
+              <a-tab-pane key="member-review" tab="成员审核">成员审核</a-tab-pane>
+              <a-tab-pane key="supervisor" tab="指导老师?">指导老师</a-tab-pane>
+              <a-tab-pane key="club-activities" tab="社团活动">社团活动</a-tab-pane>
+              <a-tab-pane key="operation-record" tab="操作记录?">操作记录</a-tab-pane>
+              <a-tab-pane key="advanced-search" tab="高级搜索">
+                <a-form style="height: 200px; background-color: lightgray;">
+                  高级搜索
+                </a-form>
+              </a-tab-pane>
+            </a-tabs>
+
+            //分割线
+            <a-divider style="padding-top: 10px; padding-bottom: 10px;"/>
+
+            //批量操作
+            <a-space :size="16">
+              <a-button>
+                <PlusOutlined />
+                新建
+              </a-button>
+              <a-button>批量导入</a-button>
+              <a-button>批量删除</a-button>
+              <a-button>
+                <DownloadOutlined />下载</a-button>
+            </a-space>
+
+            //高级搜索下-成员列表页 （有script）
+            <a-table
+              :columns="columns"
+              :row-key="record => record.login.uuid"
+              :data-source="dataSource"
+              :pagination="pagination"
+              :loading="loading"
+              @change="handleTableChange"
+            >
+              <template #name="{ text }">{{ text.first }} {{ text.last }}</template>
+            </a-table>
+            <script lang="ts">
             
-          </div>
-        </a-layout-content>
-        <a-layout-footer style="text-align: center;">
-          Ant Design ©2018 Created by Ant UED
-        </a-layout-footer>
+            </script>
+
+            //留白（看看还需要么？）
+            <div style="height: 60px;"></div>
+
+            </div>
+
+                    
+            </a-layout-content>
+              <a-layout-footer style="text-align: center;">
+                    河南大学社团管理系统
+              </a-layout-footer>
       </a-layout>
     </a-layout>
   </a-layout>
@@ -99,10 +138,21 @@ import {
   TeamOutlined,
   ShopOutlined,
 } from '@ant-design/icons-vue';
+const activeKey = ref("basic-info");
 const selectedKeys = ref<string[]>(['4']);
 </script>
 
 <style scoped>
+
+//tab与高级搜索
+.manager-tab{
+  .ant-tabs-tab{
+    font-size:16px;
+  }
+}
+
+
+
 .site-layout .site-layout-background {
   background: #fff;
 }
