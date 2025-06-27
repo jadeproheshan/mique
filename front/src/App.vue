@@ -63,8 +63,8 @@
 
             //page-header
             <div class="page-header" style="height:160px;">
-              <div style="font-size: 64px; font-weight: bold;">社团名称</div>
-              <div style="font-size: 24px;">成员人数、指导老师、挂靠单位</div>
+              <div style="font-size: 36px; font-weight: bold;">社团名称</div>
+              <div style="font-size: 15px;">成员人数、指导老师、挂靠单位</div>
             </div>
 
             //tab与高级搜索
@@ -87,13 +87,13 @@
 
             //批量操作
             <a-space :size="16">
-              <a-button>
+              <a-button class="manager-button">
                 <PlusOutlined />
                 新建
-              </a-button>
-              <a-button>批量导入</a-button>
-              <a-button>批量删除</a-button>
-              <a-button>
+              </a-button class="manager-button">
+              <a-button class="manager-button">批量导入</a-button>
+              <a-button class="manager-button">批量删除</a-button>
+              <a-button class="manager-button">
                 <DownloadOutlined />下载</a-button>
             </a-space>
 
@@ -233,12 +233,19 @@ const selectedKeys = ref<string[]>(['4']);
 </script>
 
 <style scoped>
+//tab与高级搜索
 .manager-tab{
   .ant-tabs-tab{
     font-size:16px;
   }
 }
 
+//批量操作
+.manager-button {
+  width: 48px;
+  height: 32px;
+  font-size: 20px;
+}
 
 
 .site-layout .site-layout-background {
