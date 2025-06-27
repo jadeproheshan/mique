@@ -21,7 +21,7 @@
           top: '64px',
           bottom: 0,
         }"
-        width="200"
+        width="260"
       >
         <a-menu style="margin-top: 24px;" v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
           <a-menu-item key="1">
@@ -56,37 +56,35 @@
       </a-layout-sider>
       
       <!-- 内容区 -->
-      <a-layout style="margin-left: 200px; min-height: calc(100vh - 64px);">
+      <a-layout style="margin-left: 260px; min-height: calc(100vh - 64px);">
         <a-layout-content style="margin: 0px 0px 0; overflow: initial;">
-          <div style="padding: 24px; background: #fff; text-align: center;">
+          <div style="padding: 16px; background: #fff;">
             <!-- page-header -->
-            <div class="page-header" style="height:160px;">
-              <div style="font-size: 36px; font-weight: bold;">社团名称</div>
-              <div style="font-size: 15px;">成员人数、指导老师、挂靠单位</div>
+            <div class="page-header">
+              <div style="font-size: 24px; font-weight: bold; padding-bottom: 18px;">社团名称</div>
+              <div style="display: flex; margin-bottom: 16px;">
+                <div style="font-size: 14px;">成员人数：xx人</div>
+                <div style="padding-left: 24px;">指导老师：</div>
+                <div style="padding-left: 24px;">挂靠单位：</div>
+              </div>
+              
             </div>
 
             <!-- tab与高级搜索 -->
             <a-tabs v-model:activeKey="activeKey" class="manager-tab">
               <a-tab-pane key="basic-info" tab="基本信息">基本信息</a-tab-pane>
               <a-tab-pane key="member-management" tab="成员管理">
-                <!-- 成员管理内容 -->
-                <div style="text-align: left; margin-top: 20px;">
-                  <!-- 批量操作 -->
-                  <a-space :size="16" style="margin-bottom: 20px;">
-                    <a-button type="primary" @click="showAddModal">
-                      <template #icon><PlusOutlined /></template>
-                      新建
-                    </a-button>
-                    <a-button>批量导入</a-button>
-                    <a-button danger>批量删除</a-button>
-                    <a-button>
-                      <template #icon><DownloadOutlined /></template>
-                      下载
-                    </a-button>
-                  </a-space>
-
-                  <!-- 分割线 -->
-                  <a-divider style="padding-top: 10px; padding-bottom: 10px;"/>
+                <div style="height: 140px; background-color: red; margin-bottom: 10px; border-bottom: 1px solid #eee; display: flex;">
+                  <!-- 第一栏搜索 -->
+                  <!-- <div style="height: auto; padding: 10px;">
+                    <a-space style="width: 100%; justify-content: space-between;">
+                      <a-input v-model:value="value" placeholder="Basic usage" />
+                      <a-input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
+                    </a-space>
+                  </div> -->
+                </div>
+                <div style="height: 49px; background-color: blue; margin-top: 10px;"></div>
+                <div style="text-align: left; margin-top: 10px;">
 
                   <!-- 成员列表 -->
                   <a-table
@@ -150,6 +148,17 @@ import {
   SettingOutlined,
   PlusOutlined,
 } from '@ant-design/icons-vue';
+
+// 搜索组件
+import { watch } from 'vue';
+const value = ref<string>('');
+const value1 = ref<string>('');
+watch(value, () => {
+  console.log(value.value);
+});
+watch(value1, () => {
+  console.log(value1.value);
+});
 
 // 标签页状态
 const activeKey = ref("member-management");
